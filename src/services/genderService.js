@@ -1,10 +1,10 @@
 import db from "../models/index"
 import response from "../Validators/responseDataMessage"
 
-exports.getRole = async () => {
+exports.getGender = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Role.findAll(
+            let data = await db.Gender.findAll(
                 {
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
                 }
@@ -16,25 +16,25 @@ exports.getRole = async () => {
     });
 }
 
-exports.setRole = async (data) => {
+exports.setGender = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
 
             if (data.id && data.name) {
-                let role = await db.Role.findOne(
+                let gender = await db.Gender.findOne(
                     {
                         where: { id: data.id }
                     }
                 )
 
-                let checkpoint = await db.Role.findOne(
+                let checkpoint = await db.Gender.findOne(
                     { where: { name: data.name } }
                 )
 
-                if (role && role.name != data.name && !checkpoint && data.id > 2) {
-                    rs.setResponseSuccess("Role updated successfully");
-                    await db.Role.update(
+                if (gender && gender.name != data.name && !checkpoint && data.id > 2) {
+                    rs.setResponseSuccess("Gender updated successfully");
+                    await db.Gender.update(
                         {
                             name: data.name
                         },
@@ -42,7 +42,7 @@ exports.setRole = async (data) => {
                             where: { id: data.id }
                         })
                 } else {
-                    rs.setResponseFail("Can not update role");
+                    rs.setResponseFail("Can not update gender");
                 }
             }
 
@@ -53,25 +53,25 @@ exports.setRole = async (data) => {
     });
 }
 
-exports.createRole = async (name) => {
+exports.createGender = async (name) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
 
             if (name) {
-                let role = await db.Role.findOne(
+                let gender = await db.Gender.findOne(
                     {
                         where: { name: name }
                     }
                 )
-                if (!role) {
-                    rs.setResponseSuccess("Role create successfully");
-                    await db.Role.create(
+                if (!gender) {
+                    rs.setResponseSuccess("Gender create successfully");
+                    await db.Gender.create(
                         { name: name }
                     );
                 }
                 else {
-                    rs.setResponseFail("Can not create role");
+                    rs.setResponseFail("Can not create gender");
                 }
             }
 
@@ -82,26 +82,26 @@ exports.createRole = async (name) => {
     });
 }
 
-exports.deleteRole = async (id) => {
+exports.deleteGender = async (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
             if (id) {
-                let role = await db.Role.findOne(
+                let gender = await db.Gender.findOne(
                     {
                         where: { id: id }
                     }
                 );
-                if (role && id > 2) {
-                    rs.setResponseSuccess("Delete role successfully");
-                    await db.Role.destroy(
+                if (gender && id > 2) {
+                    rs.setResponseSuccess("Delete gender successfully");
+                    await db.Gender.destroy(
                         {
                             where: { id: id }
                         }
                     )
                 }
                 else {
-                    rs.setResponseFail("Can not delete role");
+                    rs.setResponseFail("Can not delete gender");
                 }
             }
 

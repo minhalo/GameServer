@@ -1,31 +1,31 @@
-import roleService from "../services/roleService"
+import addressService from "../services/addressService"
 
-exports.getRole = async (req, res) => {
-    let result = await roleService.getRole();
+exports.getAddress = async (req, res) => {
+    let result = await addressService.getAddress();
     return res.status(200).json(result);
 }
 
-exports.setRole = async (req, res) => {
+exports.setAddress = async (req, res) => {
     let data = req.body;
-    let result = await roleService.setRole(data);
+    let result = await addressService.setAddress(data);
     if (!result.errCode) {
         return res.status(200).json(result);
     }
     return res.status(202).json(result);
 }
 
-exports.createRole = async (req, res) => {
+exports.createAddress = async (req, res) => {
     let name = req.body.name;
-    let result = await roleService.createRole(name);
+    let result = await addressService.createAddress(name);
     if (!result.errCode) {
         return res.status(200).json(result);
     }
     return res.status(202).json(result);
 }
 
-exports.deleteRole = async (req, res) => {
+exports.deleteAddress = async (req, res) => {
     let id = req.query.id;
-    let result = await roleService.deleteRole(id);
+    let result = await addressService.deleteAddress(id);
     if (!result.errCode) {
         return res.status(200).json(result);
     }

@@ -1,78 +1,81 @@
 'use strict';
 module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Users', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      email: {
-        type: Sequelize.STRING
-      },
-      password: {
-        type: Sequelize.STRING
-      },
-      image: {
-        type: Sequelize.INTEGER
-      },
-      status: {
-        type: Sequelize.INTEGER
-      },
-      token: {
-        type: Sequelize.TEXT
-      },
-      RoleId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Roles",
-          key: "id"
-        }
-      },
-      name: {
-        type: Sequelize.STRING
-      },
-      age: {
-        type: Sequelize.INTEGER
-      },
-      coin: {
-        type: Sequelize.INTEGER
-      },
-      AddressId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Addresses",
-          key: "id"
-        }
-      },
-      GenderId: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model: "Genders",
-          key: "id"
-        }
-      },
-      gmail: {
-        type: Sequelize.STRING
-      },
+    up: async (queryInterface, Sequelize) => {
+        await queryInterface.createTable('Users', {
+            id: {
+                allowNull: false,
+                autoIncrement: true,
+                primaryKey: true,
+                type: Sequelize.INTEGER
+            },
+            name: {
+                type: Sequelize.STRING
+            },
+            age: {
+                type: Sequelize.INTEGER
+            },
+            status: {
+                type: Sequelize.INTEGER
+            },
+            gmail: {
+                type: Sequelize.STRING
+            },
+            coin: {
+                type: Sequelize.INTEGER
+            },
+            purchaseCoin: {
+                type: Sequelize.INTEGER
+            },
+            password: {
+                type: Sequelize.STRING
+            },
+            refreshToken: {
+                type: Sequelize.STRING
+            },
+            expire: {
+                type: Sequelize.DATE
+            },
+            fileuId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Fileus",
+                    key: "id"
+                }
+            },
+            roleId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Roles",
+                    key: "id"
+                }
+            },
+            addressId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Addresses",
+                    key: "id"
+                }
+            },
+            genderId: {
+                type: Sequelize.INTEGER,
+                references: {
+                    model: "Genders",
+                    key: "id"
+                }
+            },
 
 
-
-
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
-    });
-  },
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Users');
-  }
+            createdAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            },
+            updatedAt: {
+                allowNull: false,
+                type: Sequelize.DATE
+            }
+        });
+    },
+    down: async (queryInterface, Sequelize) => {
+        await queryInterface.dropTable('Users');
+    }
 };

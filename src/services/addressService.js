@@ -1,10 +1,10 @@
 import db from "../models/index"
 import response from "../Validators/responseDataMessage"
 
-exports.getRole = async () => {
+exports.getAddress = async () => {
     return new Promise(async (resolve, reject) => {
         try {
-            let data = await db.Role.findAll(
+            let data = await db.Address.findAll(
                 {
                     attributes: { exclude: ['createdAt', 'updatedAt'] },
                 }
@@ -16,25 +16,25 @@ exports.getRole = async () => {
     });
 }
 
-exports.setRole = async (data) => {
+exports.setAddress = async (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
 
             if (data.id && data.name) {
-                let role = await db.Role.findOne(
+                let address = await db.Address.findOne(
                     {
                         where: { id: data.id }
                     }
                 )
 
-                let checkpoint = await db.Role.findOne(
+                let checkpoint = await db.Address.findOne(
                     { where: { name: data.name } }
                 )
 
-                if (role && role.name != data.name && !checkpoint && data.id > 2) {
-                    rs.setResponseSuccess("Role updated successfully");
-                    await db.Role.update(
+                if (address && address.name != data.name && !checkpoint && data.id > 2) {
+                    rs.setResponseSuccess("address updated successfully");
+                    await db.Address.update(
                         {
                             name: data.name
                         },
@@ -42,7 +42,7 @@ exports.setRole = async (data) => {
                             where: { id: data.id }
                         })
                 } else {
-                    rs.setResponseFail("Can not update role");
+                    rs.setResponseFail("Can not update address");
                 }
             }
 
@@ -53,25 +53,25 @@ exports.setRole = async (data) => {
     });
 }
 
-exports.createRole = async (name) => {
+exports.createAddress = async (name) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
 
             if (name) {
-                let role = await db.Role.findOne(
+                let address = await db.Address.findOne(
                     {
                         where: { name: name }
                     }
                 )
-                if (!role) {
-                    rs.setResponseSuccess("Role create successfully");
-                    await db.Role.create(
+                if (!address) {
+                    rs.setResponseSuccess("address create successfully");
+                    await db.Address.create(
                         { name: name }
                     );
                 }
                 else {
-                    rs.setResponseFail("Can not create role");
+                    rs.setResponseFail("Can not create address");
                 }
             }
 
@@ -82,26 +82,26 @@ exports.createRole = async (name) => {
     });
 }
 
-exports.deleteRole = async (id) => {
+exports.deleteAddress = async (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let rs = new response();
             if (id) {
-                let role = await db.Role.findOne(
+                let address = await db.Address.findOne(
                     {
                         where: { id: id }
                     }
                 );
-                if (role && id > 2) {
-                    rs.setResponseSuccess("Delete role successfully");
-                    await db.Role.destroy(
+                if (address && id > 2) {
+                    rs.setResponseSuccess("Delete address successfully");
+                    await db.Address.destroy(
                         {
                             where: { id: id }
                         }
                     )
                 }
                 else {
-                    rs.setResponseFail("Can not delete role");
+                    rs.setResponseFail("Can not delete address");
                 }
             }
 
