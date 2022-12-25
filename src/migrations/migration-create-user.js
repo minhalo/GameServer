@@ -29,8 +29,11 @@ module.exports = {
             password: {
                 type: Sequelize.STRING
             },
+            accessToken: {
+                type: Sequelize.TEXT
+            },
             refreshToken: {
-                type: Sequelize.STRING
+                type: Sequelize.TEXT
             },
             expire: {
                 type: Sequelize.DATE

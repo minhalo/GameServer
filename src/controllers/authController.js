@@ -84,3 +84,34 @@ exports.register = async (req, res) => {
     let result = await authService.register(data);
     return res.status(200).json(result);
 }
+
+exports.login = async (req, res) => {
+    let data = req.body;
+    if (!data.gmail) {
+        return res.status(203).json({
+            errCode: 2,
+            errMessage: "Gmail must be provided"
+        });
+    }
+    if (!isGmail(data.gmail)) {
+        return res.status(203).json({
+            errCode: 2,
+            errMessage: "Gmail must be email format"
+        });
+    }
+    if (!data.password) {
+        return res.status(203).json({
+            errCode: 3,
+            errMessage: "Password must be provided"
+        });
+    }
+    let result = await authService.login(data);
+    return res.status(200).json(result);
+}
+
+exports.refreshTK = async (req, res) => {
+    let data = req.body.authorization;
+
+    let result = await authService.refreshTK(data);
+    return res.status(200).json(result);
+}
