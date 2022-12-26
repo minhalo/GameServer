@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
          * The `models/index` file will call this method automatically.
          */
         static associate(models) {
-            Fileu.hasMany(models.User, { foreignKey: "fileuId", as: "arc4" })
+            Fileu.hasMany(models.User, { foreignKey: "fileuId", as: "file" })
         }
     };
     Fileu.init({

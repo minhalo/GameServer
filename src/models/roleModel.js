@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
       // Role.hasOne(models.User, { foreignKey: "RoleId", as: "arc" })
       // // Role.hasOne(models.Role, {foreignKey: "accountId", as: "arc"})
       Role.hasMany(models.Direction, { foreignKey: "roleId", as: "arc" })
-      Role.hasOne(models.User, { foreignKey: "roleId", as: "arc2" })
+      Role.hasOne(models.User, { foreignKey: "roleId", as: "role" })
 
     }
   };

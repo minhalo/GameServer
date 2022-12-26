@@ -13,10 +13,10 @@ module.exports = (sequelize, DataTypes) => {
             // // define association here
             // Role.hasOne(models.User, { foreignKey: "RoleId", as: "arc" })
             // // Role.hasOne(models.Role, {foreignKey: "accountId", as: "arc"})
-            User.belongsTo(models.Gender, { foreignKey: "genderId", as: "arc1" })
-            User.belongsTo(models.Role, { foreignKey: "roleId", as: "arc2" })
-            User.belongsTo(models.Address, { foreignKey: "addressId", as: "arc3" })
-            User.belongsTo(models.Fileu, { foreignKey: "fileuId", as: "arc4" })
+            User.belongsTo(models.Gender, { foreignKey: "genderId", as: "gender" })
+            User.belongsTo(models.Role, { foreignKey: "roleId", as: "role" })
+            User.belongsTo(models.Address, { foreignKey: "addressId", as: "address" })
+            User.belongsTo(models.Fileu, { foreignKey: "fileuId", as: "file" })
 
         }
     };
@@ -30,7 +30,6 @@ module.exports = (sequelize, DataTypes) => {
         password: DataTypes.STRING,
         accessToken: DataTypes.TEXT,
         refreshToken: DataTypes.TEXT,
-        expire: DataTypes.DATE,
         fileuId: DataTypes.INTEGER,
         roleId: DataTypes.INTEGER,
         addressId: DataTypes.INTEGER,

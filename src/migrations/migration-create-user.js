@@ -35,9 +35,7 @@ module.exports = {
             refreshToken: {
                 type: Sequelize.TEXT
             },
-            expire: {
-                type: Sequelize.DATE
-            },
+
             fileuId: {
                 type: Sequelize.INTEGER,
                 references: {

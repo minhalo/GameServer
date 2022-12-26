@@ -18,10 +18,15 @@ app.use(cors())
 
 
 app.use(function (req, res, next) {
-    res.setHeader('Access-Control-Allow-Origin', 'https://localhost:8081');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    const corsWhitelist = [
+        'https://localhost:4200',
+    ];
+    if (corsWhitelist.indexOf(req.headers.origin) !== -1) {
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+        res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+        res.setHeader('Access-Control-Allow-Methods', 'Content-Type', 'Authorization');
+        res.setHeader('Access-Control-Allow-Credentials', true);
+    }
     next();
 });
 
