@@ -17,18 +17,11 @@ exports.loginMail = (gmail, name, age) => {
     let detail = {
         from: 'duongdoican@gmail.com',
         to: gmail,
-        subject: 'blindex activated account',
+        subject: 'Blindex activated account',
         html: `
         <div
         style="width:500px; height: 250px; margin-top: 10px; margin-left: 10px; padding: 10px 10px; box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; border-radius: 5px 5px;">
-        <div style=" display: inline-block;">
-            <img src="https://localhost:8081/img/avatarDefault/male" style="width: 150px;" />
-        </div>
-        <div style=" display: inline-block;">
-            <p style="margin: 0;">Name: ${name}</p>
-            <p style="margin: 0;">Age: ${age}</p>
-            <p style="margin: 0;">Gmail: ${gmail}</p>
-        </div>
+        <h1 style="margin: 0; color: red">Hi, ${name}</h1>
         <div style="margin-bottom: 10px">
             Please click on button to activate your account
         </div>

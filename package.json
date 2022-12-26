@@ -21,6 +21,7 @@
     "express": "^4.17.1",
     "express-rate-limit": "^6.7.0",
     "faker": "^6.6.6",
+    "geoip-lite": "^1.4.6",
     "https-pem": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.4",
