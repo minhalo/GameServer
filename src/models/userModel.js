@@ -31,6 +31,7 @@ module.exports = (sequelize, DataTypes) => {
         accessToken: DataTypes.TEXT,
         refreshToken: DataTypes.TEXT,
         fileuId: DataTypes.INTEGER,
+        activated: DataTypes.INTEGER,
         roleId: DataTypes.INTEGER,
         addressId: DataTypes.INTEGER,
         genderId: DataTypes.INTEGER,

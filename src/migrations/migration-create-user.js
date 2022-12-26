@@ -35,6 +35,10 @@ module.exports = {
             refreshToken: {
                 type: Sequelize.TEXT
             },
+            activated: {
+                type: Sequelize.INTEGER
+            },
+
 
             fileuId: {
                 type: Sequelize.INTEGER,

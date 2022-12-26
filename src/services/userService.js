@@ -49,7 +49,10 @@ exports.me = async (token) => {
             // );
             resolve(data[0]);
         } catch (error) {
-            reject(error)
+            resolve({
+                errCode: 1,
+                errMessage: 'Invalid token'
+            })
         }
     });
 }

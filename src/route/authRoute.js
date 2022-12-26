@@ -9,6 +9,7 @@ let authRoute = (app) => {
     router.post('/auth/register', rateLimit.authLimiter, authController.register);
     router.post('/auth/login', rateLimit.authLimiter, authController.login);
     router.patch('/auth/refreshTK', rateLimit.authLimiter, authController.refreshTK);
+    router.get('/auth/activated/:gmail', rateLimit.authLimiter, authController.activated);
 
     return app.use("/", router)
 }

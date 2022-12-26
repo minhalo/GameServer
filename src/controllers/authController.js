@@ -5,6 +5,18 @@ exports.test = async (req, res) => {
     return res.status(200).json({ teset: "hi minh" });
 }
 
+// activated
+exports.activated = async (req, res) => {
+    let gmail = req.params.gmail
+    let result = await authService.activated(gmail)
+    if (result.errCode) {
+        return res.status(200).send('<h1>Activated account successfully!</h1>');
+    } else {
+        return res.status(200).send('<h1>Your account has already activated!</h1>');
+    }
+
+}
+
 exports.register = async (req, res) => {
     let data = req.body;
     if (!data.name) {

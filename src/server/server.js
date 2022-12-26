@@ -11,7 +11,7 @@ import pem from "https-pem"
 require('dotenv').config();
 
 let app = express();
-
+app.set('trust proxy', true)
 app.use(cors())
 // app.use(cors({origin: false}));
 // app.options('*', cors())

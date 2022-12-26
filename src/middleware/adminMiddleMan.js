@@ -30,6 +30,9 @@ exports.adminFireWallbody = async (req, res, next) => {
 }
 
 exports.adminFireWallheader = async (req, res, next) => {
+    // var ip = (req.headers['x-forwarded-for'] || '').split(',').pop().trim() ||
+    //     req.socket.remoteAddress
+    // console.log(ip);
     let authorization = req.headers['authorization'];
     if (authorization) {
         let token = authorization.split(" ")[1]

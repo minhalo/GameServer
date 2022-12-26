@@ -3,6 +3,7 @@ import response from "../Validators/responseDataMessage"
 import hashPass from "../Validators/hashPass"
 import jwt from "jsonwebtoken"
 import isTokenExpired from "../Validators/checkToken"
+import email from '../Validators/mail'
 
 exports.register = async (data) => {
     return new Promise(async (resolve, reject) => {
@@ -35,7 +36,8 @@ exports.register = async (data) => {
             }
             let fileuId = data.genderId == 1 ? 1 : 2
             if (!oldData && checkPointGender && checkPointAddress) {
-                rs.setResponseAll(0, "Account created successfully")
+                email.loginMail(data.gmail, data.name, data.age)
+                rs.setResponseAll(0, "Account created successfully, please activate your account via gmail")
                 let hash = await hashPass.hash(data.password);
 
                 await db.User.create(
@@ -49,7 +51,7 @@ exports.register = async (data) => {
                         password: hash,
                         accessToken: "New Account",
                         refreshToken: "New account",
-                        // expire: Date.now(),
+                        activated: 0,
                         fileuId: fileuId,
                         roleId: 2,
                         addressId: data.addressId,
@@ -79,7 +81,10 @@ exports.login = async (data) => {
             if (!gmail) {
                 rs.setResponseAll(2, "Account not found")
             }
-            if (gmail) {
+            if (!gmail.activated) {
+                rs.setResponseAll(2, "Please activate your account first")
+            }
+            if (gmail && gmail.activated) {
                 let checkpoint = await hashPass.compareHash(data.password, gmail.password)
                 if (!checkpoint) {
                     rs.setResponseAll(3, "Wrong password")
@@ -157,7 +162,11 @@ exports.refreshTK = async (data) => {
                 where: { id: decode.id }
             })
 
-            if (checkpoint && !isTokenExpired(token) && checkpoint.refreshToken == token && bear == "bearer") {
+            if (!checkpoint.activated) {
+                result.errMessage = "Please activate your account through gmail first"
+            }
+
+            if (checkpoint && !isTokenExpired(token) && checkpoint.refreshToken == token && bear == "bearer" && checkpoint.activated) {
                 let accessToken = jwt.sign({
                     id: decode.id,
                     gmail: decode.gmail,
@@ -186,3 +195,35 @@ exports.refreshTK = async (data) => {
         }
     });
 }
+
+exports.activated = async (gmail) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let result = {
+                errCode: 1,
+            }
+
+            let checkpoint = await db.User.findOne({
+                where: { gmail: gmail }
+            })
+
+            if (checkpoint && !checkpoint.activated) {
+                await db.User.update({ activated: 1 }, { where: { gmail: gmail } })
+            }
+            else {
+                result.errCode = 0
+            }
+
+            resolve(result);
+        } catch (error) {
+            resolve({
+                errCode: 1,
+                errMessage: "Invalid token"
+            })
+
+        }
+    });
+}
+
+
+// activated

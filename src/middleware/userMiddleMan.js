@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken"
 
 exports.userFireWallheader = async (req, res, next) => {
     let authorization = req.headers['authorization'];
+
     if (authorization) {
         let token = authorization.split(" ")[1]
         let bear = authorization.split(" ")[0]
